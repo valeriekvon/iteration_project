@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>iteration 75 of 100</title>
+<style>
+  body { background:#fff; color:#222; font-family:'Helvetica Neue',Arial,sans-serif;
+          margin:0; padding:30px; max-width:1200px; }
+  h1 { margin:0 0 4px; font-size:13px; font-weight:normal;
+        letter-spacing:0.08em; text-transform:uppercase; }
+  #subtitle { margin:0 0 24px; font-size:12px; color:#888; }
+  canvas { display:block; max-width:100%; height:auto;
+            image-rendering:pixelated; background:#fff; border:1px solid #eee; }
+  nav { margin-top:18px; font-size:12px; }
+  nav a { color:#222; text-decoration:none; margin-right:10px; padding:6px 12px;
+          border:1px solid #ccc; display:inline-block; }
+  nav a:hover { background:#222; color:#fff; }
+  .progress { margin-top:18px; font-family:monospace; font-size:11px; color:#888; }
+  .progress .bar { display:inline-block; width:200px; height:4px; background:#eee;
+                    vertical-align:middle; margin:0 10px; }
+  .progress .fill { display:block; height:100%; background:#222; }
+</style>
+</head>
+<body>
+  <h1>iteration 75 / 100</h1>
+  <p id="subtitle">75% rendered · 450,000 of 600,000 pixels</p>
+  <canvas id="canvas" width="1200" height="500"></canvas>
+  <nav>
+    <a href="74.html">← prev</a>
+    <a href="76.html">next →</a>
+    <a href="index.html">index</a>
+    <a href="?play=1">play from here</a>
+  </nav>
+  <p class="progress">
+    [<span class="bar"><span class="fill" style="width:75%"></span></span>] 75%
+  </p>
+
+<script>
+const ITERATION = 75;
+const TOTAL = 100;
+const WIDTH = 1200;
+const HEIGHT = 500;
+const AUTOADVANCE_MS = 1500;
+
+async function loadAndRender() {
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, WIDTH, HEIGHT);
+  const img = ctx.getImageData(0, 0, WIDTH, HEIGHT);
+
+  // fetch all deltas from 1 to ITERATION in parallel
+  // (browser caches these — chain animation only fetches one new file per step)
+  const promises = [];
+  for (let i = 1; i <= ITERATION; i++) {
+    promises.push(fetch('data/' + i + '.csv').then(r => r.text()));
+  }
+  const texts = await Promise.all(promises);
+
+  // accumulate all delta pixels (order is irrelevant — they don't overlap)
+  for (const text of texts) {
+    const lines = text.split('\n');
+    for (let i = 1; i < lines.length; i++) {
+      const ln = lines[i].trim();
+      if (!ln) continue;
+      const p = ln.split(',');
+      if (p.length < 5) continue;
+      const idx = (+p[1] * WIDTH + +p[0]) * 4;
+      img.data[idx] = +p[2];
+      img.data[idx+1] = +p[3];
+      img.data[idx+2] = +p[4];
+      img.data[idx+3] = 255;
+    }
+  }
+  ctx.putImageData(img, 0, 0);
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('play')) {
+    const next = ITERATION + 1;
+    const target = next > TOTAL ? 'index.html' : next + '.html?play=1';
+    setTimeout(() => { window.location = target; }, AUTOADVANCE_MS);
+  }
+}
+loadAndRender();
+</script>
+</body>
+</html>

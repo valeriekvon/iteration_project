@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>iteration project</title>
+<style>
+  body { font-family:'Helvetica Neue',Arial,sans-serif; max-width:640px;
+          margin:60px auto; padding:0 24px; line-height:1.5; color:#222; }
+  h1 { font-size:14px; font-weight:normal; letter-spacing:0.08em;
+        text-transform:uppercase; margin-bottom:24px; }
+  p { font-size:14px; }
+  a.start { display:inline-block; padding:10px 20px; background:#222; color:#fff;
+            text-decoration:none; margin:20px 0; font-size:13px;
+            letter-spacing:0.05em; text-transform:uppercase; }
+  a.start:hover { background:#444; }
+  .grid { display:grid; grid-template-columns:repeat(10,1fr); gap:3px; margin:30px 0; }
+  .grid a { display:flex; align-items:center; justify-content:center;
+            aspect-ratio:1; background:#f4f4f4; font-size:10px; color:#666;
+            text-decoration:none; }
+  .grid a:hover { background:#222; color:#fff; }
+  .meta { margin-top:30px; font-size:11px; color:#888; line-height:1.6; }
+</style>
+</head>
+<body>
+  <h1>One image · One hundred iterations</h1>
+  <p>A photograph of a publication containing the line: "We believe that technology is at its very best when it is invisible."</p>
+  <p>Below: one hundred steps reconstructing the image from a spreadsheet
+     of pixel values. Each iteration adds 1% of the data.
+     Click <em>begin</em> to play the chain as a slow animation, or pick any
+     iteration directly to view it as a static page.</p>
+  <a class="start" href="1.html?play=1">begin →</a>
+  <div class="grid">
+    <a href="1.html">1</a><a href="2.html">2</a><a href="3.html">3</a><a href="4.html">4</a><a href="5.html">5</a><a href="6.html">6</a><a href="7.html">7</a><a href="8.html">8</a><a href="9.html">9</a><a href="10.html">10</a><a href="11.html">11</a><a href="12.html">12</a><a href="13.html">13</a><a href="14.html">14</a><a href="15.html">15</a><a href="16.html">16</a><a href="17.html">17</a><a href="18.html">18</a><a href="19.html">19</a><a href="20.html">20</a><a href="21.html">21</a><a href="22.html">22</a><a href="23.html">23</a><a href="24.html">24</a><a href="25.html">25</a><a href="26.html">26</a><a href="27.html">27</a><a href="28.html">28</a><a href="29.html">29</a><a href="30.html">30</a><a href="31.html">31</a><a href="32.html">32</a><a href="33.html">33</a><a href="34.html">34</a><a href="35.html">35</a><a href="36.html">36</a><a href="37.html">37</a><a href="38.html">38</a><a href="39.html">39</a><a href="40.html">40</a><a href="41.html">41</a><a href="42.html">42</a><a href="43.html">43</a><a href="44.html">44</a><a href="45.html">45</a><a href="46.html">46</a><a href="47.html">47</a><a href="48.html">48</a><a href="49.html">49</a><a href="50.html">50</a><a href="51.html">51</a><a href="52.html">52</a><a href="53.html">53</a><a href="54.html">54</a><a href="55.html">55</a><a href="56.html">56</a><a href="57.html">57</a><a href="58.html">58</a><a href="59.html">59</a><a href="60.html">60</a><a href="61.html">61</a><a href="62.html">62</a><a href="63.html">63</a><a href="64.html">64</a><a href="65.html">65</a><a href="66.html">66</a><a href="67.html">67</a><a href="68.html">68</a><a href="69.html">69</a><a href="70.html">70</a><a href="71.html">71</a><a href="72.html">72</a><a href="73.html">73</a><a href="74.html">74</a><a href="75.html">75</a><a href="76.html">76</a><a href="77.html">77</a><a href="78.html">78</a><a href="79.html">79</a><a href="80.html">80</a><a href="81.html">81</a><a href="82.html">82</a><a href="83.html">83</a><a href="84.html">84</a><a href="85.html">85</a><a href="86.html">86</a><a href="87.html">87</a><a href="88.html">88</a><a href="89.html">89</a><a href="90.html">90</a><a href="91.html">91</a><a href="92.html">92</a><a href="93.html">93</a><a href="94.html">94</a><a href="95.html">95</a><a href="96.html">96</a><a href="97.html">97</a><a href="98.html">98</a><a href="99.html">99</a><a href="100.html">100</a>
+  </div>
+  <p class="meta">
+    The image is sourced from a single Canon RAW file, demosaiced and quantised
+    to 8-bit RGB. Pixels were shuffled with a fixed seed and divided into 100
+    equal cumulative sets. The corresponding spreadsheet
+    (<code>spreadsheet_deltas.xlsx</code>) contains 100 tabs, each holding only
+    the new pixels added at that iteration. QR codes for each iteration are in
+    the <code>qr/</code> folder for use in the printed publication.
+  </p>
+</body>
+</html>
